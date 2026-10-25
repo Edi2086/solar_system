@@ -1,0 +1,16 @@
+:root{font-family:Arial,Helvetica,sans-serif;color:#d6dbe1;background:#000}
+header{height:72px;border:0;background:linear-gradient(#000b,transparent)}
+.brand{font-size:11px;letter-spacing:3px;font-weight:500}.brand-icon{font-size:23px;color:#bbc7d3}.brand-light{font-size:10px;color:#6f7b87}
+.live{font-size:8px;color:#7e8a95}.live i{box-shadow:none;background:#a6b7aa}
+.eyebrow{color:#8696a6;font-size:8px}.intro{display:none}
+aside,body.planet-focused aside{top:110px;right:3%;background:linear-gradient(90deg,transparent,#0008);border:0;border-radius:0;backdrop-filter:none;width:220px;padding:20px}
+.planet-heading h2{font-family:Arial,sans-serif;font-weight:300;font-size:32px;letter-spacing:-1px}#number{font-size:17px;color:#6d7985}aside p{color:#84919d;font-size:11px;line-height:1.8}#facts>div{border-color:#ffffff12;font-size:10px}#facts strong{font-weight:400;color:#cad2da}#focus{border-color:#9eafbf40;color:#bbcbd9;background:transparent;border-radius:2px}
+.navigation{bottom:14px;padding:13px 18px 0;background:#05080bbf;border:1px solid #ffffff13;border-radius:3px;backdrop-filter:blur(8px)}
+nav{padding:10px 0}nav button{border-radius:2px;color:#87939f;font-size:10px;gap:7px;padding:7px 3px}nav button.active{color:#e0e7ed;border-color:#c1d0df40;background:#b5c7da0a}nav .orb{width:18px;height:18px}nav button:first-child .orb{box-shadow:none}nav button:nth-child(7) .orb:after{top:12px}
+.nav-top{font-size:7px;color:#788592}.timeline{padding:10px 0;color:#6b7884}.time-controls button{color:#b8c8d8}input{accent-color:#9eb2c6}.view-tools{bottom:190px;gap:5px}.view-tools button{border-radius:2px;background:#03060980;border-color:#ffffff1a;color:#99a9b8;font-size:11px}.body-label{font-size:8px!important;letter-spacing:2px;color:#7b8d9e!important;font-weight:400!important}
+#loading{background:#000;font-family:Arial,sans-serif;font-weight:300;letter-spacing:2px;font-size:20px}dialog{border-radius:3px;background:#080c11}dialog a{color:#a7bdcf}
+@media(max-width:600px){header{height:60px}.brand{font-size:9px;letter-spacing:2px}aside,body.planet-focused aside{top:78px;bottom:auto;width:165px;padding:12px;right:2%}aside p{display:none}.view-tools{bottom:192px}.navigation{padding:12px 8px 0}.planet-heading h2{font-size:25px}nav button{min-width:48px}.live{font-size:6px}}
+
+body:not(.planet-focused) aside p,body:not(.planet-focused) #facts,body:not(.planet-focused) #focus{display:none}
+body:not(.planet-focused) aside{width:180px;top:88px;padding:12px;background:transparent;pointer-events:none}
+body:not(.planet-focused) aside h2{font-size:24px}
