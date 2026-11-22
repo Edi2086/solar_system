@@ -1,0 +1,21 @@
+{% extends 'learning/base.html' %}
+{% block title %}Science Study | Study Hub{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="{% url 'learning:home' %}">Study Hub</a><span aria-hidden="true">/</span><span aria-current="page">Science</span></nav>
+<section class="hero science-hero">
+  <p class="eyebrow">SCIENCE STUDY</p>
+  <h1>A universe<br><span>of discoveries.</span></h1>
+  <p class="intro">Welcome to Science Study. Let’s start with our solar system: the Sun, eight planets, and the many moons, asteroids, and comets that share our neighborhood in space.</p>
+</section>
+<section class="welcome-panel" aria-labelledby="solar-heading">
+  <div>
+    <p class="eyebrow">START EXPLORING</p>
+    <h2 id="solar-heading">Meet your solar system.</h2>
+    <p>The Sun is the star at its center. The planets travel around it in paths called orbits. Earth is the third planet from the Sun—and our home.</p>
+    <a class="button primary" href="{% url 'learning:solar_system' %}" target="_blank" rel="noopener">Open the 3D solar system <span class="sr-only">(opens in a new tab)</span></a>
+    <p class="learning-note">Try finding Earth, then compare it with Jupiter. Which one looks bigger? The simulation adjusts sizes, distances, and speeds to make exploring easier.</p>
+  </div>
+  <div class="solar-art" aria-hidden="true"><span class="sun"></span><span class="planet"></span><span class="planet small"></span></div>
+</section>
+<a class="back-link" href="{% url 'learning:home' %}">Back to Study Hub</a>
+{% endblock %}

@@ -6,7 +6,16 @@ const skyMaterial=new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false
  float hash(vec3 p){p=fract(p*0.3183099+vec3(0.17,0.31,0.73));p*=17.0;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
  float noise3(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
  float fbm(vec3 p){float n=0.0,a=0.5;for(int i=0;i<5;i++){n+=a*noise3(p);p=p*2.03+vec3(5.3,1.7,9.2);a*=0.5;}return n;}
- void main(){vec3 d=normalize(direction);float structure=fbm(d*5.0);float band=exp(-pow((d.y+d.x*0.22+0.12)*3.3,2.0));float haze=smoothstep(0.25,0.76,structure)*band;float dust=smoothstep(0.39,0.67,fbm(d*11.0+9.0));vec3 blue=vec3(0.025,0.041,0.074);vec3 violet=vec3(0.065,0.033,0.063);vec3 cloud=mix(blue,violet,fbm(d*3.0+4.0))*haze;cloud*=1.0-dust*0.96;gl_FragColor=vec4(vec3(0.00015)+cloud,1.0);}
+ void main(){vec3 d=normalize(direction);float structure=fbm(d*5.0);float band=exp(-pow((d.y+d.x*0.22+0.12)*3.3,2.0));float haze=smoothstep(0.25,0.76,structure)*band;float dust=smoothstep(0.39,0.67,fbm(d*11.0+9.0));vec3 blue=vec3(0.025,0.041,0.074);vec3 violet=vec3(0.065,0.033,0.063);vec3 cloud=mix(blue,violet,fbm(d*3.0+4.0))*haze;
+ // A distant spiral galaxy, oriented toward the initial system camera.
+ vec3 axis=normalize(vec3(0.32,-0.26,-1.0));
+ vec3 right=normalize(cross(vec3(0.0,1.0,0.0),axis));vec3 up=cross(axis,right);
+ float forward=dot(d,axis);vec2 p=vec2(dot(d,right),dot(d,up)*2.2);
+ float radius=length(p);float angle=atan(p.y,p.x);float spiral=pow(0.5+0.5*cos(angle*2.0-radius*19.0),4.0);
+ float disc=exp(-radius*5.0)*smoothstep(0.0,0.12,radius)*smoothstep(0.3,0.7,forward);
+ float core=exp(-radius*32.0)*smoothstep(0.3,0.7,forward);
+ cloud+=vec3(0.14,0.20,0.32)*spiral*disc*(0.45+structure)+vec3(0.45,0.34,0.23)*core;
+cloud*=1.0-dust*0.96;gl_FragColor=vec4(vec3(0.00015)+cloud,1.0);}
 `});
 const deepSky=new THREE.Mesh(skyGeometry,skyMaterial);deepSky.renderOrder=-10;scene.add(deepSky);
 // Small luminous stellar cores with soft, restrained halos.

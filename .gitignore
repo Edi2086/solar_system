@@ -1,2 +1,13 @@
 .DS_Store
 *.textClipping
+
+site-build/
+
+# Local Python virtual environment
+.venv/
+
+# Local Django database and Python caches
+__pycache__/
+*.py[cod]
+db.sqlite3
+db.sqlite3-*

@@ -1,0 +1,8 @@
+#nuclear-bomb{color:#ffd1a3;border-color:#e49b5688;background:#48250fa6}#nuclear-bomb:hover{background:#6a3418}#nuclear-bomb[aria-pressed=true]{color:#c3deee;border-color:#8cafcb88;background:#152a3b}#galaxy-message{position:fixed;left:50%;top:43%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;letter-spacing:6px;font-size:clamp(20px,4vw,45px);font-weight:300;color:#ffd1a3;text-shadow:0 0 35px #e5a35c99;z-index:3;width:90%}#galaxy-message.aftermath{color:#87939e;text-shadow:none;font-size:clamp(18px,3vw,34px)}#galaxy-message[hidden]{display:none}button:disabled{opacity:.45;cursor:default}
+
+/* Prominent launch control stays visible above the simulation. */
+#nuclear-bomb{position:fixed;right:22px;bottom:26px;z-index:1000;display:block!important;visibility:visible!important;min-height:64px;padding:18px 28px;border:2px solid #ffca76;border-radius:12px;background:linear-gradient(135deg,#ef6035,#b71938);color:#fff4d9;font-size:18px;font-weight:800;letter-spacing:1px;box-shadow:0 0 32px #ff633366,0 8px 28px #0009;cursor:pointer}
+#nuclear-bomb:hover{background:linear-gradient(135deg,#ff8143,#d92c49);transform:translateY(-2px)}
+#nuclear-bomb:focus-visible{outline:3px solid white;outline-offset:4px}
+#nuclear-bomb[aria-pressed=true]{background:#172e43;color:#d9efff;border-color:#a9d9ff}
+@media(max-width:600px){#nuclear-bomb{right:12px;bottom:16px;min-height:56px;font-size:14px;padding:14px 18px}}
