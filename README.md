@@ -93,3 +93,28 @@ python manage.py test learning
 ```
 
 The tests check the home page, Science navigation, and that the solar-system route returns exactly the existing file. The solar-system HTML and `dist/` assets were not moved or modified by this Django setup. Python caches, the local database, and `.venv/` are ignored by Git.
+
+## Deploy Study Hub to Vercel
+
+The root `vercel.json` selects Vercel's **Django** integration. The old standalone solar-system build command and `site-build` output directory are no longer used for this deployment. The standalone HTML remains available through Science Study and can still be opened independently.
+
+**Static files** are the CSS, JavaScript, and images that style a page. In `config/settings.py`, `STATIC_URL = '/static/'` gives these files a consistent browser address, and `STATIC_ROOT = BASE_DIR / 'staticfiles'` defines a collection folder. Vercel automatically runs Django's `collectstatic` command and serves the collected files through its CDN. The generated `staticfiles/` folder is ignored by Git; the original stylesheet stays in `learning/static/learning/`.
+
+In the Vercel project's Build and Deployment settings:
+
+1. Use the repository root as the Root Directory (the folder containing `manage.py`).
+2. Use the **Django** framework preset. Leave the Build Command and Output Directory at their framework defaults; do not use `scripts/build-vercel.py` or `site-build` for Study Hub.
+3. Deploy the updated commit. The build logs should show static files being collected.
+4. Open `/static/learning/study-hub.css` on your deployed domain. It should return CSS, not a 404 page. Then refresh the home and Science pages.
+
+To check static-file collection locally:
+
+```sh
+source .venv/bin/activate
+python manage.py collectstatic --noinput
+python manage.py test learning
+```
+
+The original `scripts/build-vercel.py` is kept for the separate static solar-system export; it is not the Django deployment build.
+
+Reference: https://vercel.com/docs/frameworks/full-stack/django#serving-static-assets

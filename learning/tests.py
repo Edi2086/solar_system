@@ -37,3 +37,38 @@ class StudyHubTests(SimpleTestCase):
         finally:
             response.close()
         self.assertEqual(served.hexdigest(), hashlib.sha256(original.read_bytes()).hexdigest())
+
+
+class StaticDeploymentTests(SimpleTestCase):
+    def test_pages_use_the_same_absolute_stylesheet_url_without_debug(self):
+        # Django's development server must not be required to build these URLs.
+        from django.test import override_settings
+
+        with override_settings(DEBUG=False):
+            for name in ("learning:home", "learning:science"):
+                with self.subTest(page=name):
+                    response = self.client.get(reverse(name))
+                    self.assertContains(
+                        response,
+                        'href="/static/learning/study-hub.css"',
+                    )
+
+    def test_collectstatic_packages_the_study_hub_and_admin_styles(self):
+        from tempfile import TemporaryDirectory
+        from django.core.management import call_command
+        from django.test import override_settings
+
+        # Run the actual deployment collection step in an isolated directory.
+        with TemporaryDirectory(prefix="study-hub-static-") as directory:
+            with override_settings(STATIC_ROOT=directory, DEBUG=False):
+                call_command("collectstatic", interactive=False, verbosity=0)
+                collected = Path(directory)
+                original = (
+                    Path(settings.BASE_DIR)
+                    / "learning/static/learning/study-hub.css"
+                )
+                self.assertEqual(
+                    (collected / "learning/study-hub.css").read_bytes(),
+                    original.read_bytes(),
+                )
+                self.assertTrue((collected / "admin/css/base.css").is_file())

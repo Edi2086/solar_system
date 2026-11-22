@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "python3 scripts/build-vercel.py",
-  "outputDirectory": "site-build"
+  "framework": "django",
+  "buildCommand": null,
+  "outputDirectory": null
 }
